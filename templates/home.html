@@ -40,12 +40,16 @@
       
       <h2 class='text-center mt-2 mb-4'>Job Openings</h2>
 
-      {%for job in jobs%}
+      {%for job in job_openings%}
         <div class="border-bottom row mt-3 mb-3">
           <div class="col-9 mb-2">
             <h3>{{job.title}}</h3>
             <h5>{{job.location}}</h5>
-            <h5>Rs{{job.salary}}</h5>
+            {%if (job.salary != None)%}
+              <h5>{{job.currency}} {{job.salary}}</h5>
+            {%endif%}
+<!--             <p>{{job.responsiblities}}</p>
+            <p>{{job.requirements}}</p> -->
           </div>
           <div class="col-3">
             <a href = "mailto:chawadesharvari17@gmail.com" type="button" class="btn btn-outline-primary">Apply</a>
