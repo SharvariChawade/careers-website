@@ -11,6 +11,18 @@ engine = create_engine(connection_string,
                            "ssl_ca": "/etc/ssl/cert.pem"
                          }
                        })
+def get_job_from_db(id):
+  with engine.connect() as conn:
+    result = conn.execute(
+      text('SELECT * FROM jobs WHERE id = :val'),
+     {'val':int(id)}
+    )
+  r = result.all()
+  if(len(r) != 0):
+    r1 = r[0]._asdict()
+    return r1
+  elif(len(r) == 0):
+    return None
 
 # with engine.connect() as conn:
 #   result = conn.execute(text("select * from jobs"))
