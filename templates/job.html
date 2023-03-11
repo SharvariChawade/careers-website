@@ -4,33 +4,42 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% include 'bootstrap.html'%}
   <title>{{job['title']}}</title>
 </head>
   
 <body>
+  {% include 'nav.html'%}
+  {% include 'banner.html'%}
+  <br>
+  <br>
+  <br>
+  <div class='container mb-10'>
+    <h1>{{job['title']}}</h1>
+    
+    <h3>{{job['location']}}</h3>
+    
+    {%if (job['salary'] != None)%}
+      <h3>{{job['currency']}} {{job['salary']}}</h3>
+    {%endif%}
   
-  <h1>{{job['title']}}</h1>
+    <h3>Responsibilities</h3>
+    <ul>
+      {%for r in responsibilities%}
+        <li>{{r}}</li>
+      {%endfor%}
+    </ul>
   
-  <h3>{{job['location']}}</h3>
+    <h3>Requirements</h3>
+    <ul>
+      {%for r in requirements%}
+        <li>{{r}}</li>
+      {%endfor%}
+    </ul>
   
-  {%if (job['salary'] != None)%}
-    <h3>{{job['currency']}} {{job['salary']}}</h3>
-  {%endif%}
-
-  <h3>Responsibilities</h3>
-  <ul>
-    {%for r in responsibilities%}
-      <li>{{r}}</li>
-    {%endfor%}
-  </ul>
-
-  <h3>Requirements</h3>
-  <ul>
-    {%for r in requirements%}
-      <li>{{r}}</li>
-    {%endfor%}
-  </ul>
-
+    {% include 'application.html'%}
+</div>
+{% include 'footer.html'%}
 </body>
   
 </html>

@@ -11,6 +11,7 @@ engine = create_engine(connection_string,
                            "ssl_ca": "/etc/ssl/cert.pem"
                          }
                        })
+
 def get_job_from_db(id):
   with engine.connect() as conn:
     result = conn.execute(
@@ -24,6 +25,18 @@ def get_job_from_db(id):
   elif(len(r) == 0):
     return None
 
+def add_jobs_to_db(id,application):
+  with engine.connect() as conn:
+    conn.execute(text('INSERT INTO applications (job_id, full_name,email,linkedin_url,education,work_experience,resume_url) VALUES (:job, :name,:email,:linkedin,:edu,:work,:resume)'),
+              {'job':int(id),
+               'name':application['full_name'],
+               'email':application['email'],
+               'linkedin':application['linkedin'],
+               'edu':application['education'],
+               'work':application['experience'],
+               'resume':application['resume_url']})
+
+#Unused code
 # with engine.connect() as conn:
 #   result = conn.execute(text("select * from jobs"))
   # print(result.all())
